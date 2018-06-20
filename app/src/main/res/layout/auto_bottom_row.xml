@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="12dp"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="0dp"/>
+
+    <TextView
+        style="@style/AutoBottomRowStyle"
+        android:background="@color/colorLessMin"
+        android:text="小于40km/h"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        style="@style/AutoBottomRowStyle"
+        android:background="@color/colorBetweenMinAndMax"
+        android:text="40-90km/h"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        style="@style/AutoBottomRowStyle"
+        android:background="@color/colorGreaterMax"
+        android:text="大于90km/h"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        style="@style/AutoBottomRowStyle"
+        android:background="@color/colorQuiet"
+        android:text="静止"/>
+
+</LinearLayout>
