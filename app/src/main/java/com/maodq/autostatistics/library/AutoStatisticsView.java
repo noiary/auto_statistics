@@ -31,6 +31,24 @@ public class AutoStatisticsView extends LinearLayoutCompat {
     private List<AutoData> mData;
     private int mDateWidth;
 
+    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+        @Override public void onClick(int index, StatisticsView v) {
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (child instanceof StatisticsView && child.isSelected()) {
+                    if (child == v) return;
+                    child.setSelected(false);
+                }
+            }
+
+            v.setSelected(true);
+            AutoData autoData = mData.get(index);
+            if (autoData != null) {
+                setHeaderTitle(autoData.date, autoData.distance);
+            }
+        }
+    };
+
     public AutoStatisticsView(Context context) {
         this(context, null);
     }
@@ -61,7 +79,7 @@ public class AutoStatisticsView extends LinearLayoutCompat {
 
         removeAllViews();
         // title (今日行驶xxx公里)
-        setHeaderTitle("今", mData.get(0).distance);
+        setHeaderTitle("今日", mData.get(0).distance);
         addView(getHeaderView(getContext()),
                 generateLayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, mTitleHeight));
 
@@ -71,7 +89,13 @@ public class AutoStatisticsView extends LinearLayoutCompat {
         // 图表
         for (int i = 0; i < mData.size(); i++) {
             AutoData autoData = mData.get(i);
-            StatisticsView child = new StatisticsView(getContext(), autoData);
+            final StatisticsView child = new StatisticsView(getContext(), autoData);
+            final int index = i;
+            child.setOnClickListener(new OnClickListener() {
+                @Override public void onClick(View v) {
+                    mOnItemClickListener.onClick(index, child);
+                }
+            });
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     mProgressHeight);
             layoutParams.topMargin = mProgressHeight;
@@ -119,5 +143,9 @@ public class AutoStatisticsView extends LinearLayoutCompat {
         }
 
         return mHeaderView;
+    }
+
+    private interface OnItemClickListener {
+        void onClick(int index, StatisticsView v);
     }
 }

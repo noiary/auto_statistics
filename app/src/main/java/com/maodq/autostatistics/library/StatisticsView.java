@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.maodq.autostatistics.R;
 import com.maodq.autostatistics.library.data.AutoData;
 import com.maodq.autostatistics.library.data.ProgressData;
 
@@ -58,6 +59,12 @@ public class StatisticsView extends View {
             return;
         }
 
+
+        if (isSelected()) {
+            mDatePaint.setColor(getResources().getColor(R.color.colorLessMin));
+        } else {
+            mDatePaint.setColor(COLOR_DATE);
+        }
         int width = (int) (Config.DATE_WIDTH * density + 12 * density);
         canvas.drawText(mData.date, 0, density * 12, mDatePaint);
         canvas.translate(width, 0);
